@@ -13,7 +13,7 @@ function ConfigTest() {
       </Header>
       <main>
         <Tagline color={client.primaryColor}>{client.tagline}</Tagline>
-        <Button bg={client.primaryColor}>Button</Button>
+        <Button bg={client.primaryColor}>Test</Button>
       </main>
     </Container>
   );
