@@ -19,6 +19,11 @@ export interface ClientConfig {
   name: string;
   tagline: string;
   logo: string;
+  heading?: string;
+  logoAltText: string;
+  phone: string;
+  email: string;
+  address: string;
 
   primaryColor: string;
   secondaryColor: string;
@@ -48,4 +53,5 @@ export interface TimeSlot {
 export interface DaySlots {
   date: Date;
   slots: TimeSlot[];
+
 }

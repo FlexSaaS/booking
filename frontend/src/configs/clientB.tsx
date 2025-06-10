@@ -34,6 +34,11 @@ const clientAConfig: ClientConfig = {
       price: "£100,000",
     },
   ],
+  logoAltText: "Test For Client B",
+  phone: "01234567890",
+  email: "testB@gmail.com",
+  address: " 123 Test Street, Test City, TC1 2AB",
+  heading: "Client B Salon",
 };
 
 export default clientAConfig;
