@@ -1,6 +1,6 @@
 # Flexible Booking SaaS
 
-A simple, customisable SaaS web platform built for small businesses.
+A simple, customisable SaaS web platform designed for small businesses to manage client appointment bookings.
 
 ## Installation
 
