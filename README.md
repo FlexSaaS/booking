@@ -1,4 +1,4 @@
-# Flexible SaaS
+# Flexible Booking SaaS
 
 A simple, customisable SaaS web platform built for small businesses.
 
