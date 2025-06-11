@@ -20,6 +20,10 @@ const clientAConfig: ClientConfig = {
   address: "75 liverpool street, SE46PN",
 
   secondaryColor: "lightgreen",
+  lightGray: "#e5e7eb;",
+  darkGray: "#6b7280",
+  primaryDark: "#1f2937",
+  primaryWhite: "#ffffff",
   primaryRed: "#ef4444",
   boxShadowColor: "rgba(0, 0, 0, 0.1)",
 

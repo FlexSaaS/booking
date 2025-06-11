@@ -6,6 +6,7 @@ import Header from "./Components/Header";
 import ServiceSelection from "./Components/ServiceSeleciton";
 import HomeView from "./Components/HomeView";
 import { getClientConfig } from "./lib/getClientConfig";
+import ProgressBar from "./Components/ProgressBar";
 import ClientInfo from "./Components/ClientInfo";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <AppContainer fontFamily={client.fontFamily}>
         <GlobalStyle />
         <Header />
+        <ProgressBar />
         <Routes>
           <Route path="/" element={<HomeView client={client} />} />
           <Route path="/service" element={<ServiceSelection appointment={appointment} updateAppointment={updateAppointment} />} />

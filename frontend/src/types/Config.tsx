@@ -30,6 +30,10 @@ export interface ClientConfig {
   secondaryColor: string;
   boxShadowColor?: string;
   fontFamily: string;
+  lightGray?: string;
+  darkGray?: string;
+  primaryDark?: string;
+  primaryWhite?: string;
 
   services: Service[];
 }
