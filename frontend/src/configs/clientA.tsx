@@ -14,12 +14,14 @@ const clientAConfig: ClientConfig = {
   logo: "/clientA-logo.png",
   logoAltText: "Professional Hair Stylist",
   primaryColor: "#4a2db5",
-  fontFamily: "Gill Sans",
+  fontFamily: "Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif",
   phone: "07923423424",
   email: "masaf@hair.com",
   address: "75 liverpool street, SE46PN",
 
   secondaryColor: "lightgreen",
+  primaryRed: "#ef4444",
+  boxShadowColor: "rgba(0, 0, 0, 0.1)",
 
   services: [
     {
