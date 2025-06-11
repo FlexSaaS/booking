@@ -10,11 +10,16 @@ import type { ClientConfig, ServiceType } from "../types/Config";
 const clientAConfig: ClientConfig = {
   name: "Client A",
   tagline: "Book your sessions in seconds!",
+  heading: "Luminous Locks Salon",
   logo: "/clientA-logo.png",
+  logoAltText: "Professional Hair Stylist",
+  primaryColor: "#4a2db5",
+  fontFamily: "Gill Sans",
+  phone: "07923423424",
+  email: "masaf@hair.com",
+  address: "75 liverpool street, SE46PN",
 
-  primaryColor: "lightblue",
   secondaryColor: "lightgreen",
-  fontFamily: "Montserrat",
 
   services: [
     {
