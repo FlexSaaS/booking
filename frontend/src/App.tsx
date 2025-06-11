@@ -6,6 +6,7 @@ import Header from "./Components/Header";
 import ServiceSelection from "./Components/ServiceSeleciton";
 import HomeView from "./Components/HomeView";
 import { getClientConfig } from "./lib/getClientConfig";
+import ClientInfo from "./Components/ClientInfo";
 
 function App() {
   const client = getClientConfig();
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeView client={client} />} />
           <Route path="/service" element={<ServiceSelection appointment={appointment} updateAppointment={updateAppointment} />} />
+          <Route path="/client" element={<ClientInfo client={client} appointment={appointment} updateAppointment={updateAppointment} />} />
         </Routes>
       </AppContainer>
     </Router>
