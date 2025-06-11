@@ -83,8 +83,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 2rem;
-  background: linear-gradient(135deg, #fff8f0, #fae0ff, #e0f4ff, #f0fff8); 
+  padding: 1rem;
+  background: linear-gradient(135deg, #fff8f0, #fae0ff, #e0f4ff, #f0fff8);
   background-size: 400% 400%;
   animation: ${gradientShift} 15s ease infinite;
 `;
@@ -104,6 +104,15 @@ const ProfileCard = styled.div`
   &:hover {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     transform: translateY(-5px);
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 1rem;
   }
 `;
 
@@ -126,6 +135,11 @@ const ProfileImage = styled.img<{ primaryColor: string }>`
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 15px 40px rgba(122, 89, 221, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
   }
 `;
 
