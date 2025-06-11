@@ -1,4 +1,3 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Appointment, ServiceType } from "../types/Config";
 import { useNavigate } from "react-router-dom";
@@ -6,17 +5,17 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { getClientConfig } from "../lib/getClientConfig";
 
-const client = getClientConfig();
-
 interface ServiceSelectionProps {
+  client: ReturnType<typeof getClientConfig>;
   appointment: Partial<Appointment>;
   updateAppointment: (data: Partial<Appointment>) => void;
 }
 
-const ServiceSelection: React.FC<ServiceSelectionProps> = ({
+function ServiceSelection({
+  client,
   appointment,
   updateAppointment,
-}) => {
+}: ServiceSelectionProps) {
   const navigate = useNavigate();
 
   const handleServiceSelect = (service: ServiceType) => {
@@ -81,7 +80,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = ({
       </ButtonWrapper>
     </Container>
   );
-};
+}
 
 export default ServiceSelection;
 

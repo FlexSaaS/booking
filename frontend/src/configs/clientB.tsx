@@ -39,6 +39,7 @@ const clientAConfig: ClientConfig = {
   email: "testB@gmail.com",
   address: " 123 Test Street, Test City, TC1 2AB",
   heading: "Client B Salon",
+  primaryRed: "",
 };
 
 export default clientAConfig;
