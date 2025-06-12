@@ -34,6 +34,7 @@ export interface ClientConfig {
   darkGray?: string;
   primaryDark?: string;
   primaryWhite?: string;
+  primaryGreen?: string;
 
   services: Service[];
 }

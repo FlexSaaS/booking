@@ -153,7 +153,7 @@ export default ClientInfo;
 
 // Styled Components
 const ClientInfoContainer = styled.div<{ boxShadowColor: string }>`
-  max-width: 900px;
+  max-width:  1200px;
   background: white;
   border-radius: 10px;
   padding: 2rem;
