@@ -126,7 +126,7 @@ const ServiceCard = styled.div<{
   background-color: ${({ isSelected, primaryColor }) =>
     isSelected ? primaryColor : "#fff"};
   transition: all 0.3s ease;
-
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   &:hover {
     background-color: ${({ secondaryColor }) => secondaryColor};
   }
