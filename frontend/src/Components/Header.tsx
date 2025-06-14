@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { getClientConfig } from "../lib/getClientConfig";
 
-const client = getClientConfig();
+interface Props {
+  client: ReturnType<typeof getClientConfig>;
+}
 
-function Header() {
+function Header({ client }: Props) {
   return (
     <Container>
       <h1>{client.name}</h1>

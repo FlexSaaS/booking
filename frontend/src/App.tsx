@@ -9,6 +9,7 @@ import { getClientConfig } from "./lib/getClientConfig";
 import ProgressBar from "./Components/ProgressBar";
 import ClientInfo from "./Components/ClientInfo";
 import Confirmation from "./Components/Confirmation";
+import CalendarView from "./Components/CalendarPage";
 
 function App() {
   const client = getClientConfig();
@@ -21,13 +22,49 @@ function App() {
     <Router>
       <AppContainer fontFamily={client.fontFamily}>
         <GlobalStyle />
-        <Header />
-        <ProgressBar />
+        <Header client={client} />
+        <ProgressBar client={client} />
         <Routes>
           <Route path="/" element={<HomeView client={client} />} />
-          <Route path="/service" element={<ServiceSelection appointment={appointment} updateAppointment={updateAppointment} />} />
-          <Route path="/client" element={<ClientInfo client={client} appointment={appointment} updateAppointment={updateAppointment} />} />
-          <Route path="/confirmation" element={<Confirmation client={client} appointment={appointment as Appointment} />} />
+          <Route
+            path="/service"
+            element={
+              <ServiceSelection
+                client={client}
+                appointment={appointment}
+                updateAppointment={updateAppointment}
+              />
+            }
+          />
+          <Route
+            path="/client"
+            element={
+              <ClientInfo
+                client={client}
+                appointment={appointment}
+                updateAppointment={updateAppointment}
+              />
+            }
+          />
+          <Route
+            path="/time"
+            element={
+              <CalendarView
+                client={client}
+                appointment={appointment}
+                updateAppointment={updateAppointment}
+              />
+            }
+          />
+          <Route
+            path="/confirmation"
+            element={
+              <Confirmation
+                client={client}
+                appointment={appointment as Appointment}
+              />
+            }
+          />
         </Routes>
       </AppContainer>
     </Router>
@@ -40,7 +77,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-  
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -53,6 +91,5 @@ const AppContainer = styled.div<{ fontFamily: string }>`
   min-height: 100vh;
   flex-direction: column;
   width: 100%;
-
   overflow-x: hidden;
 `;
