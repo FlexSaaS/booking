@@ -13,7 +13,7 @@ import {
 import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import type { Appointment } from "../../types/Types";
-import { getClientConfig } from "../../lib/getClientConfig";
+import { getClientConfig } from "../../configs/getClientConfig";
 
 const client = getClientConfig();
 

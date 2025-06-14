@@ -9,7 +9,7 @@ import ProgressBar from "./ReusableComponents/ProgressBar";
 import ClientInfo from "./Pages/detailsPage/DetailsPage";
 import Confirmation from "./Pages/confirmationPage/ConfirmationPage";
 import CalendarView from "./Pages/calendarPage/CalendarPage";
-import { getClientConfig } from "./lib/getClientConfig";
+import { getClientConfig } from "./configs/getClientConfig";
 
 const client = getClientConfig();
 

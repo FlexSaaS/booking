@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Appointment } from "../../../types/Types";
 import styled from "styled-components";
-import { getClientConfig } from "../../../lib/getClientConfig";
+import { getClientConfig } from "../../../configs/getClientConfig";
 
 const client = getClientConfig();
 

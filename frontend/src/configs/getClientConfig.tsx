@@ -1,7 +1,7 @@
-import type { ClientConfig } from "../configs/ConfigType";
-import { luxeSalonConfig } from "../configs/luxeSalonConfig";
-import { trimTidyConfig } from "../configs/trimTidyConfig";
-import { defaultClientConfig } from "../configs/defaultClient";
+import type { ClientConfig } from "./ConfigType";
+import { luxeSalonConfig } from "./clientConfigs.tsx/luxeSalonConfig";
+import { trimTidyConfig } from "./clientConfigs.tsx/trimTidyConfig";
+import { defaultClientConfig } from "./clientConfigs.tsx/defaultClient";
 
 const configMap: Record<string, ClientConfig> = {
   luxeSalon: luxeSalonConfig,

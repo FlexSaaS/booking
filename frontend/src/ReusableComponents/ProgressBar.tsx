@@ -7,7 +7,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
-import { getClientConfig } from "../lib/getClientConfig";
+import { getClientConfig } from "../configs/getClientConfig";
 
 const client = getClientConfig();
 

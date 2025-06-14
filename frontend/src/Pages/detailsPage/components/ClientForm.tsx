@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import type { Appointment } from "../../../types/Types";
-import { getClientConfig } from "../../../lib/getClientConfig";
+import { getClientConfig } from "../../../configs/getClientConfig";
 import ForwardButton from "../../../ReusableComponents/ForwardButton";
 
 const client = getClientConfig();

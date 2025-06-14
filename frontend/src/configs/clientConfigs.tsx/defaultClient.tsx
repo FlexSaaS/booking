@@ -1,5 +1,5 @@
 // src/configs/defaultClientConfig.ts
-import type { ClientConfig } from "./ConfigType";
+import type { ClientConfig } from "../ConfigType";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const defaultClientConfig: ClientConfig = {

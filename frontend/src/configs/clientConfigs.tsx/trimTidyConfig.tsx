@@ -1,4 +1,4 @@
-import type { ClientConfig } from "./ConfigType";
+import type { ClientConfig } from "../ConfigType";
 import {
   faScissors,
   faClock,

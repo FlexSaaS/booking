@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { getClientConfig } from "../../lib/getClientConfig";
+import { getClientConfig } from "../../configs/getClientConfig";
 import ForwardButton from "../../ReusableComponents/ForwardButton";
 
 const client = getClientConfig();

@@ -5,7 +5,7 @@ import { useTimeSlotService } from "../../../hooks/useTimeSlotServices";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import type { Appointment } from "../../../types/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getClientConfig } from "../../../lib/getClientConfig";
+import { getClientConfig } from "../../../configs/getClientConfig";
 
 const client = getClientConfig();
 
