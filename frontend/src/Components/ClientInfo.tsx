@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faUser, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faUser,
+  faEnvelope,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import type { Appointment } from "../types/Config";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,8 +14,8 @@ import type { getClientConfig } from "../lib/getClientConfig";
 
 interface ClientInfoProps {
   appointment: Partial<Appointment>;
-    updateAppointment: (data: Partial<Appointment>) => void;
-    client: ReturnType<typeof getClientConfig>;
+  updateAppointment: (data: Partial<Appointment>) => void;
+  client: ReturnType<typeof getClientConfig>;
 }
 
 interface ClientFormData {
@@ -22,11 +27,17 @@ interface ClientFormData {
 
 const STORAGE_KEY = "clientInfoForm";
 
-const ClientInfo: React.FC<ClientInfoProps> = ({ appointment, updateAppointment, client }) => {
+const ClientInfo: React.FC<ClientInfoProps> = ({
+  appointment,
+  updateAppointment,
+  client,
+}) => {
   const navigate = useNavigate();
 
   // Load saved values from localStorage if available
-  const savedData: ClientFormData = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {
+  const savedData: ClientFormData = JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "null"
+  ) || {
     name: appointment.client?.name ?? "",
     email: appointment.client?.email ?? "",
     phone: appointment.client?.phone ?? "",
@@ -70,7 +81,9 @@ const ClientInfo: React.FC<ClientInfoProps> = ({ appointment, updateAppointment,
   }
 
   return (
-    <ClientInfoContainer boxShadowColor={client.boxShadowColor || "rgba(0, 0, 0, 0.1)"}>
+    <ClientInfoContainer
+      boxShadowColor={client.boxShadowColor || "rgba(0, 0, 0, 0.1)"}
+    >
       <BackButton onClick={prevStep}>
         <FontAwesomeIcon icon={faChevronLeft} /> Back to Date & Time
       </BackButton>
@@ -92,7 +105,12 @@ const ClientInfo: React.FC<ClientInfoProps> = ({ appointment, updateAppointment,
           <Label htmlFor="name">
             <FontAwesomeIcon icon={faUser} /> Full Name
           </Label>
-          <Input id="name" type="text" {...register("name", { required: "Name is required" })} placeholder="Your name" />
+          <Input
+            id="name"
+            type="text"
+            {...register("name", { required: "Name is required" })}
+            placeholder="Your name"
+          />
           {errors.name && <Error>{errors.name.message}</Error>}
         </FormGroup>
 
@@ -112,7 +130,9 @@ const ClientInfo: React.FC<ClientInfoProps> = ({ appointment, updateAppointment,
             })}
             placeholder="youremail@gmail.com"
           />
-          {errors.email && <Error color={client.primaryRed}>{errors.email.message}</Error>}
+          {errors.email && (
+            <Error color={client.primaryRed}>{errors.email.message}</Error>
+          )}
         </FormGroup>
 
         <FormGroup>
@@ -131,16 +151,28 @@ const ClientInfo: React.FC<ClientInfoProps> = ({ appointment, updateAppointment,
             })}
             placeholder="009977331232"
           />
-          {errors.phone && <Error color={client.primaryRed}>{errors.phone.message}</Error>}
+          {errors.phone && (
+            <Error color={client.primaryRed}>{errors.phone.message}</Error>
+          )}
         </FormGroup>
 
         <FormGroup>
           <Label htmlFor="notes">Special Requests (Optional)</Label>
-          <Textarea id="notes" {...register("notes")} placeholder="Any special requests or notes for your stylist..." rows={3} />
+          <Textarea
+            id="notes"
+            {...register("notes")}
+            placeholder="Any special requests or notes for your stylist..."
+            rows={3}
+          />
         </FormGroup>
 
         <NavigationButtons>
-          <ContinueButton color={client.primaryColor} boxShadowColor={client.boxShadowColor} disabled={!isValid} type="submit">
+          <ContinueButton
+            color={client.primaryColor}
+            boxShadowColor={client.boxShadowColor}
+            disabled={!isValid}
+            type="submit"
+          >
             Confirm Appointment
           </ContinueButton>
         </NavigationButtons>
@@ -153,7 +185,7 @@ export default ClientInfo;
 
 // Styled Components
 const ClientInfoContainer = styled.div<{ boxShadowColor: string }>`
-  max-width: 900px;
+  max-width: 1200px;
   background: white;
   border-radius: 10px;
   padding: 2rem;
@@ -237,7 +269,10 @@ const NavigationButtons = styled.div`
   gap: 1rem;
 `;
 
-const ContinueButton = styled.button<{ color: string, boxShadowColor?: string }>`
+const ContinueButton = styled.button<{
+  color: string;
+  boxShadowColor?: string;
+}>`
   margin-top: 1rem;
   background-color: ${({ color }) => color};
   color: white;

@@ -8,7 +8,8 @@ import HomeView from "./Components/HomeView";
 import { getClientConfig } from "./lib/getClientConfig";
 import ProgressBar from "./Components/ProgressBar";
 import ClientInfo from "./Components/ClientInfo";
-import CalendarView from "./Components/CalendarView";
+import Confirmation from "./Components/Confirmation";
+import CalendarView from "./Components/CalendarPage";
 
 function App() {
   const client = getClientConfig();
@@ -45,7 +46,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/time"
             element={
@@ -53,6 +53,15 @@ function App() {
                 client={client}
                 appointment={appointment}
                 updateAppointment={updateAppointment}
+              />
+            }
+          />
+          <Route
+            path="/confirmation"
+            element={
+              <Confirmation
+                client={client}
+                appointment={appointment as Appointment}
               />
             }
           />
