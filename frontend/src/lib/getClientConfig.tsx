@@ -1,15 +1,15 @@
-import type { ClientConfig } from "../types/Config";
-import clientAConfig from "../configs/clientA";
-import clientBConfig from "../configs/clientB";
-// import other configs...
+import type { ClientConfig } from "../configs/ConfigType";
+import { luxeSalonConfig } from "../configs/luxeSalonConfig";
+import { trimTidyConfig } from "../configs/trimTidyConfig";
+import { defaultClientConfig } from "../configs/defaultClient";
 
 const configMap: Record<string, ClientConfig> = {
-  A: clientAConfig,
-  B: clientBConfig,
-  // ...
+  luxeSalon: luxeSalonConfig,
+  trimTidy: trimTidyConfig,
+  default: defaultClientConfig,
 };
 
 export function getClientConfig(): ClientConfig {
-  const key = import.meta.env.VITE_CLIENT || "A";
-  return configMap[key] || clientAConfig;
+  const key = import.meta.env.VITE_CLIENT || "default";
+  return configMap[key] || defaultClientConfig;
 }

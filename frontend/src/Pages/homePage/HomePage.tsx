@@ -1,20 +1,17 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { getClientConfig } from "../lib/getClientConfig";
+import { getClientConfig } from "../../lib/getClientConfig";
+import ForwardButton from "../../ReusableComponents/ForwardButton";
 
+const client = getClientConfig();
 
-interface HomeViewProps {
-    client: ReturnType<typeof getClientConfig>;
-    }
-
-const HomeView: React.FC<HomeViewProps> = ({ client }) => {
+function HomePage() {
   const navigate = useNavigate();
 
-  function handleBook() {
-    navigate("/service");
+  function handleBook(): void {
+    navigate("/services");
   }
 
   return (
@@ -22,12 +19,10 @@ const HomeView: React.FC<HomeViewProps> = ({ client }) => {
       <ProfileCard>
         <ProfileImageContainer>
           <Decoration />
-          <ProfileImage primaryColor={client.primaryColor} src={client.logo} alt={client.logoAltText} />
+          <ProfileImage />
         </ProfileImageContainer>
 
-        <BookButton primaryColor={client.primaryColor} onClick={handleBook}>
-          Book an Appointment
-        </BookButton>
+        <ForwardButton onClick={handleBook}>Book an Appointment</ForwardButton>
 
         <Description>{client.tagline}</Description>
         <ContactInfo>
@@ -44,19 +39,19 @@ const HomeView: React.FC<HomeViewProps> = ({ client }) => {
         </ContactInfo>
 
         <SocialLinks>
-          <SocialLink primaryColor={client.primaryColor} href="#" aria-label="Instagram">
+          <SocialLink href="#" aria-label="Instagram">
             <FontAwesomeIcon icon={faInstagram} />
           </SocialLink>
-          <SocialLink primaryColor={client.primaryColor} href="#" aria-label="Facebook">
+          <SocialLink href="#" aria-label="Facebook">
             <FontAwesomeIcon icon={faFacebook} />
           </SocialLink>
         </SocialLinks>
       </ProfileCard>
     </Container>
   );
-};
+}
 
-export default HomeView;
+export default HomePage;
 
 // Animations
 const fadeIn = keyframes`
@@ -123,12 +118,12 @@ const ProfileImageContainer = styled.div`
   height: 180px;
 `;
 
-const ProfileImage = styled.img<{ primaryColor: string }>`
+const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid ${({ primaryColor }) => primaryColor};
+  border: 4px solid ${client.theme.primaryColor};
   box-shadow: 0 10px 30px rgba(122, 89, 221, 0.3);
   animation: ${float} 4s ease-in-out infinite;
   transition: all 0.3s ease;
@@ -188,30 +183,12 @@ const SocialLinks = styled.div`
   margin-top: 1.5rem;
 `;
 
-const SocialLink = styled.a<{ primaryColor: string }>`
-  color: ${({ primaryColor }) => primaryColor};
+const SocialLink = styled.a`
+  color: ${client.theme.primaryColor};
   font-size: 1.5rem;
   transition: all 0.3s ease;
   &:hover {
     color: #4a2db5;
     transform: translateY(-3px);
-  }
-`;
-
-const BookButton = styled.button<{ primaryColor: string }>`
-  margin-top: 2rem;
-  background-color: ${({ primaryColor }) => primaryColor};
-  color: white;
-  padding: 0.8rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: #4726a3;
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(71, 38, 163, 0.3);
   }
 `;
