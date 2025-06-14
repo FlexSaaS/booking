@@ -26,6 +26,7 @@ const clientAConfig: ClientConfig = {
   primaryWhite: "#ffffff",
   primaryRed: "#ef4444",
   boxShadowColor: "rgba(0, 0, 0, 0.1)",
+  primaryGreen: "#4CAF50",
 
   services: [
     {
