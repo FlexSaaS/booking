@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { DayPicker } from "react-day-picker";
 import { useEffect, useState } from "react";
-import { useTimeSlotService } from "../hooks/useTimeSlotServices";
+import { useTimeSlotService } from "../../../hooks/useTimeSlotServices";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
-import type { Appointment } from "../types/Config";
+import type { Appointment } from "../../../types/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getClientConfig } from "../../../configs/getClientConfig";
+
+const client = getClientConfig();
 
 interface Props {
   appointment: Partial<Appointment>;
@@ -87,48 +90,54 @@ function Calendar({ appointment, updateAppointment }: Props) {
 
   return (
     <>
-      <CalendarWrapper>
-        <DayPicker
-          mode="single"
-          selected={appointment?.date}
-          onSelect={handleDateSelect}
-          disabled={getDisabledDays}
-          // modifiers={{ disabled: getDisabledDays }}
-          modifiersStyles={{
-            disabled: {
-              color: "#ccc",
-              backgroundColor: "#f8f9fa",
-              textDecoration: "line-through",
-            },
-          }}
-        />
-      </CalendarWrapper>
-
-      {appointment?.date && (
+      {false ? (
+        <LoadingMessage>Loading available dates...</LoadingMessage>
+      ) : (
         <>
-          <SectionTitle>
-            <FontAwesomeIcon icon={faClock} />
-            Available Time Slots
-          </SectionTitle>
-          {loadingSlots ? (
-            <LoadingMessage>Loading available times...</LoadingMessage>
-          ) : availableTimes.length > 0 ? (
-            <TimeSlots>
-              {availableTimes.map((time) => (
-                <TimeButton
-                  key={time}
-                  selected={appointment?.time === time}
-                  onClick={() => handleTimeSelect(time)}
-                  type="button"
-                >
-                  {time}
-                </TimeButton>
-              ))}
-            </TimeSlots>
-          ) : (
-            <NoSlotsMessage>
-              No available time slots for this date
-            </NoSlotsMessage>
+          <CalendarWrapper>
+            <DayPicker
+              mode="single"
+              selected={appointment?.date}
+              onSelect={handleDateSelect}
+              disabled={getDisabledDays}
+              // modifiers={{ disabled: getDisabledDays }}
+              modifiersStyles={{
+                disabled: {
+                  color: "#ccc",
+                  backgroundColor: "#f8f9fa",
+                  textDecoration: "line-through",
+                },
+              }}
+            />
+          </CalendarWrapper>
+
+          {appointment?.date && (
+            <>
+              <SectionTitle>
+                <FontAwesomeIcon icon={faClock} />
+                Available Time Slots
+              </SectionTitle>
+              {loadingSlots ? (
+                <LoadingMessage>Loading available times...</LoadingMessage>
+              ) : availableTimes.length > 0 ? (
+                <TimeSlots>
+                  {availableTimes.map((time) => (
+                    <TimeButton
+                      key={time}
+                      selected={appointment?.time === time}
+                      onClick={() => handleTimeSelect(time)}
+                      type="button"
+                    >
+                      {time}
+                    </TimeButton>
+                  ))}
+                </TimeSlots>
+              ) : (
+                <NoSlotsMessage>
+                  No available time slots for this date
+                </NoSlotsMessage>
+              )}
+            </>
           )}
         </>
       )}
@@ -145,6 +154,8 @@ const NoSlotsMessage = styled.div`
 const LoadingMessage = styled.div`
   font-style: italic;
   margin: 1rem 0;
+  color: ${client.theme.secondaryColor};
+  font-size: 1rem;
 `;
 
 const CalendarWrapper = styled.div`
@@ -177,8 +188,10 @@ const TimeButton = styled.button<{ selected: boolean }>`
   padding: 0.5rem;
   border-radius: 8px;
   border: none;
-  background: ${({ selected }) => (selected ? "#5b21b6" : "#f3f4f6")};
-  color: ${({ selected }) => (selected ? "white" : "#4b5563")};
+  background: ${({ selected }) =>
+    selected ? client.theme.primaryColor : client.theme.secondaryColor};
+  color: ${({ selected }) =>
+    selected ? client.theme.secondaryColor : client.theme.primaryColor};
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -186,6 +199,7 @@ const TimeButton = styled.button<{ selected: boolean }>`
     selected ? "0 2px 6px rgba(91, 33, 182, 0.2)" : "none"};
 
   &:hover {
-    background: ${({ selected }) => (selected ? "#4c1d95" : "#e5e7eb")};
+    background: ${({ selected }) =>
+      selected ? client.theme.secondaryColor : client.theme.primaryColor};
   }
 `;
