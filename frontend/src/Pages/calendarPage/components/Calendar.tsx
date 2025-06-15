@@ -104,7 +104,7 @@ function Calendar({ appointment, updateAppointment }: Props) {
               modifiersStyles={{
                 disabled: {
                   color: "#ccc",
-                  backgroundColor: "#f8f9fa",
+                  backgroundColor: `${client.theme.primaryColor}20`,
                   textDecoration: "line-through",
                 },
               }}
@@ -195,8 +195,7 @@ const TimeButton = styled.button<{ selected: boolean }>`
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: ${({ selected }) =>
-    selected ? "0 2px 6px rgba(91, 33, 182, 0.2)" : "none"};
+  box-shadow: ${({ selected }) => (selected ? `0 2px 6px ${client.theme.primaryColor}33` : "none")};
 
   &:hover {
     background: ${({ selected }) =>
