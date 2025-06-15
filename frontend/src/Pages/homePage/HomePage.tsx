@@ -76,10 +76,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(135deg, #fff8f0, #fae0ff, #e0f4ff, #f0fff8);
+  background: ${client.animateProfile
+    ? `linear-gradient(
+    135deg,
+    ${client.theme.backgroundColor},
+    ${client.theme.primaryColor},
+    ${client.theme.secondaryColor},
+    ${client.theme.backgroundColor}
+  )`
+    : client.theme.backgroundColor};
   background-size: 400% 400%;
   animation: ${gradientShift} 15s ease infinite;
 `;
@@ -118,11 +125,6 @@ const ProfileImageContainer = styled.div`
   margin: 0 auto;
   width: 180px;
   height: 180px;
-
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
-  }
 `;
 
 interface ProfileImageProps {
@@ -156,7 +158,6 @@ const Decoration = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 2px dashed ${client.theme.primaryColor}33;
   border: ${client.animateProfile ? ` 2px dashed ${client.theme.primaryColor}33` : "none"};
   top: -10px;
   left: -10px;
