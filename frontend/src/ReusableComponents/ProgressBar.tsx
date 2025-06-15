@@ -1,11 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendarAlt,
-  faCircleCheck,
-  faScissors,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faCircleCheck, faHandHoldingHeart, faHome, faScissors, faUser } from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
 import { getClientConfig } from "../configs/getClientConfig";
 
@@ -20,7 +15,7 @@ function ProgressBar() {
   const pathname = location.pathname;
 
   const getStatus = (step: string) => {
-    const order = ["/services", "/calendar", "/details", "/confirmation"];
+    const order = ["/", "/services", "/calendar", "/details", "/confirmation"];
     const currentIndex = order.indexOf(pathname);
     const stepIndex = order.indexOf(step);
 
@@ -33,8 +28,12 @@ function ProgressBar() {
 
   return (
     <ProgressBarWrapper>
+      <ProgressStep status={getStatus("/")}>
+        <FontAwesomeIcon icon={faHome} />
+        <span>Home</span>
+      </ProgressStep>
       <ProgressStep status={getStatus("/services")}>
-        <FontAwesomeIcon icon={faScissors} />
+        <FontAwesomeIcon icon={faHandHoldingHeart} />
         <span>Service</span>
       </ProgressStep>
 
