@@ -12,6 +12,7 @@ export const luxeSalonConfig: ClientConfig = {
   phone: "020 7946 0001",
   email: "info@luxesalon.co.uk",
   address: "10 Kensington High St, London",
+  profileImage: "/luxe-salon-profile.png",
 
   theme: {
     primaryColor: "#D4AF37", // gold
@@ -19,6 +20,7 @@ export const luxeSalonConfig: ClientConfig = {
     backgroundColor: "#FDFCFB", // very light cream
     fontFamily: "'Playfair Display', serif",
   },
+  animateProfile: true,
 
   services: [
     {

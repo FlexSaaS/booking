@@ -24,4 +24,6 @@ export const defaultClientConfig: ClientConfig = {
       price: "£0",
     },
   ],
+  animateProfile: false,
+  profileImage: undefined,
 };

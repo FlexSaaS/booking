@@ -12,10 +12,12 @@ export const trimTidyConfig: ClientConfig = {
   phone: "0161 555 9988",
   email: "bookings@trimtidy.com",
   address: "55 Oxford Road, Manchester",
+  animateProfile: false,
+  profileImage: "/trim-tidy-profile.png",
 
   theme: {
     primaryColor: "#2196F3", // blue
-    secondaryColor: "#212121", // dark gray
+    secondaryColor: "rgb(33, 150, 243, 0.3)", // semi-transparent blue
     backgroundColor: "#FFFFFF",
     fontFamily: "'Roboto', sans-serif",
   },
