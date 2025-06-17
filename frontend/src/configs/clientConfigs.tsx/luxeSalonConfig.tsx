@@ -18,7 +18,7 @@ export const luxeSalonConfig: ClientConfig = {
     primaryColor: "#D4AF37", // gold
     secondaryColor: "#2C3E50", // dark navy
     backgroundColor: "#FDFCFB", // very light cream
-    fontFamily: "'Playfair Display', serif",
+    fontFamily: `"Playfair Display", "Georgia", "Times New Roman", serif`,
   },
   animateProfile: true,
 
