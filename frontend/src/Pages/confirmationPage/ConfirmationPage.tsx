@@ -1,61 +1,60 @@
-import React, { useState } from 'react';
-import { format } from 'date-fns';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faCalendarAlt, 
-  faClock, 
-  faScissors, 
-  faUser, 
+import { useState } from "react";
+import { format } from "date-fns";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarAlt,
+  faClock,
+  faScissors,
+  faUser,
   faCheck,
   faEnvelope,
-  faExclamationTriangle
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import emailjs from "@emailjs/browser"; 
-import type { Appointment } from '../types/Config';
-import type { getClientConfig } from '../lib/getClientConfig';
+import type { Appointment } from "../../types/Types";
+import { getClientConfig } from "../../configs/getClientConfig";
 
+const client = getClientConfig();
 
-interface ConfirmationProps {
+interface Props {
   appointment: Appointment;
-  client: ReturnType<typeof getClientConfig>;
 }
 
-const Confirmation: React.FC<ConfirmationProps> = ({ appointment, client }) => {
+function ConfirmationPage({ appointment }: Props) {
   const navigate = useNavigate();
 
   // const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   // const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   // const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-  
+
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const handleEdit = () => {
-    navigate("/client");
+    navigate("/details");
   };
 
   const handleConfirm = () => {
     // console.log("Appointment confirmed:", appointment);
     setIsConfirmed(true);
-        
-        // const templateParams = {
-        //   client_name: appointment.client.name,
-        //   client_email: appointment.client.email,
-        //   client_phone: appointment.client.phone,
-        //   service: appointment.service,
-        //   date: format(appointment.date, "EEEE, MMMM do, yyyy"),
-        //   time: appointment.time,
-        //   notes: appointment.notes || '',
-          
-        // };
 
-        // // Send confirmation to the client
-        // emailjs.send( serviceId, templateId, templateParams, publicKey )
-        // .then((res) => {console.log("Client email sent:", res.status);})
-        // .catch((err) => {console.error("Client email failed:", err)});
+    // const templateParams = {
+    //   client_name: appointment.client.name,
+    //   client_email: appointment.client.email,
+    //   client_phone: appointment.client.phone,
+    //   service: appointment.service,
+    //   date: format(appointment.date, "EEEE, MMMM do, yyyy"),
+    //   time: appointment.time,
+    //   notes: appointment.notes || '',
 
-        // TODO, build a template and Send notification to the owner
+    // };
+
+    // // Send confirmation to the client
+    // emailjs.send( serviceId, templateId, templateParams, publicKey )
+    // .then((res) => {console.log("Client email sent:", res.status);})
+    // .catch((err) => {console.error("Client email failed:", err)});
+
+    // TODO, build a template and Send notification to the owner
   };
 
   const handleBackToHome = () => {
@@ -66,74 +65,75 @@ const Confirmation: React.FC<ConfirmationProps> = ({ appointment, client }) => {
     return (
       <ModalOverlay onClick={handleBackToHome}>
         <ModalContainer onClick={(e) => e.stopPropagation()}>
-          <SuccessIcon color={client.primaryGreen || "#4CAF50"}>
+          <SuccessIcon>
             <FontAwesomeIcon icon={faCheck} />
           </SuccessIcon>
-          <ModalTitle color={client.primaryGreen || "#10b981"}>Appointment Confirmed!</ModalTitle>
+          <ModalTitle>Appointment Confirmed!</ModalTitle>
           <ModalText>
-            Your appointment has been successfully booked. A confirmation has been sent to your email.
+            Your appointment has been successfully booked. A confirmation has
+            been sent to your email.
           </ModalText>
-          
+
           <div>
-            <SummaryItem color={client.primaryColor}>
+            <SummaryItem>
               <FontAwesomeIcon icon={faCalendarAlt} />
               <span>{format(appointment.date, "EEEE, MMMM do, yyyy")}</span>
             </SummaryItem>
-            <SummaryItem color={client.primaryColor}>
+            <SummaryItem>
               <FontAwesomeIcon icon={faClock} />
               <span>{appointment.time}</span>
             </SummaryItem>
-            <SummaryItem color={client.primaryColor}>
+            <SummaryItem>
               <FontAwesomeIcon icon={faScissors} />
               <span>{appointment.service}</span>
             </SummaryItem>
           </div>
-          
-          <HomeButton color={client.primaryColor} onClick={handleBackToHome}>
-            Back to Home
-          </HomeButton>
+
+          {/* TODO use ForwardButton */}
+          <HomeButton onClick={handleBackToHome}>Back to Home</HomeButton>
         </ModalContainer>
       </ModalOverlay>
     );
   }
 
-        // Check if critical information is missing
-        const isMissingCriticalInfo = !appointment.date || !appointment.time || 
-        !appointment.service || !appointment.client?.name;
+  // Check if critical information is missing
+  const isMissingCriticalInfo =
+    !appointment.date ||
+    !appointment.time ||
+    !appointment.service ||
+    !appointment.client?.name;
 
-        if (isMissingCriticalInfo) {
-        return (
-        <ErrorContainer>
-          <ErrorIcon>
-            <FontAwesomeIcon icon={faExclamationTriangle} />
-          </ErrorIcon>
-          <ErrorTitle>Missing Information</ErrorTitle>
-          <ErrorMessage>
-            Your appointment details are incomplete. Please go back and complete your booking.
-          </ErrorMessage>
-          <ErrorDetails>
-            {!appointment.date && <div>- Appointment date is missing</div>}
-            {!appointment.time && <div>- Appointment time is missing</div>}
-            {!appointment.service && <div>- Service selection is missing</div>}
-            {!appointment.client?.name && <div>- Your name is missing</div>}
-          </ErrorDetails>
-          <BackButton onClick={() => navigate('/client')}>
-            Go Back to Complete Booking
-          </BackButton>
-        </ErrorContainer>
-        );
-        }
-  
-  
-  
+  if (isMissingCriticalInfo) {
+    return (
+      <ErrorContainer>
+        <ErrorIcon>
+          <FontAwesomeIcon icon={faExclamationTriangle} />
+        </ErrorIcon>
+        <ErrorTitle>Missing Information</ErrorTitle>
+        <ErrorMessage>
+          Your appointment details are incomplete. Please go back and complete
+          your booking.
+        </ErrorMessage>
+        <ErrorDetails>
+          {!appointment.date && <div>- Appointment date is missing</div>}
+          {!appointment.time && <div>- Appointment time is missing</div>}
+          {!appointment.service && <div>- Service selection is missing</div>}
+          {!appointment.client?.name && <div>- Your name is missing</div>}
+        </ErrorDetails>
+        <BackButton onClick={() => navigate("/details")}>
+          Go Back to Complete Booking
+        </BackButton>
+      </ErrorContainer>
+    );
+  }
+
   return (
-    <ConfirmationContainer 
-     boxShadowColor={client.boxShadowColor || "rgba(0, 0, 0, 0.1)"}>
+    <ConfirmationContainer>
       <ConfirmationHeader>
-      <ConfirmationIcon color={client.darkGray || "#1f2937"}>
-            <FontAwesomeIcon icon={faCheck}size="sm" />
-      </ConfirmationIcon>
-        <h2 style={{marginBottom: "10px"}}>Confirm Your Appointment</h2>
+        <ConfirmationIcon>
+          <FontAwesomeIcon icon={faCheck} size="sm" />
+        </ConfirmationIcon>
+        <h2 style={{ marginBottom: "10px" }}>Confirm Your Appointment</h2>
         <p>Please review your appointment details below</p>
       </ConfirmationHeader>
 
@@ -172,26 +172,24 @@ const Confirmation: React.FC<ConfirmationProps> = ({ appointment, client }) => {
       </AppointmentDetails>
 
       <ConfirmationActions>
-        <EditButton color={client.primaryColor} onClick={handleEdit}>
-          Edit Appointment
-        </EditButton>
-        <ConfirmButton color={client.primaryColor} onClick={handleConfirm}>
+        <EditButton onClick={handleEdit}>Edit Appointment</EditButton>
+        <ConfirmButton onClick={handleConfirm}>
           Confirm Appointment
         </ConfirmButton>
       </ConfirmationActions>
     </ConfirmationContainer>
   );
-};
+}
 
-export default Confirmation;
+export default ConfirmationPage;
 
 // Styled Components
-const ConfirmationContainer = styled.div<{ boxShadowColor: string }>`
-  max-width:  1200px;
+const ConfirmationContainer = styled.div`
+  max-width: 1200px;
   background: white;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 4px 6px ${({ boxShadowColor }) => boxShadowColor};;
+  box-shadow: 0 4px 6px black;
   margin: 0 auto;
   margin-top: 2rem;
 `;
@@ -200,7 +198,6 @@ const ConfirmationHeader = styled.div`
   text-align: center;
   margin-bottom: 2rem;
 `;
-
 
 const AppointmentDetails = styled.div`
   background-color: rgba(249, 250, 251, 0.7);
@@ -216,17 +213,16 @@ const DetailItem = styled.div`
   margin-bottom: 1rem;
 `;
 
-
 const ConfirmationActions = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-const ConfirmButton = styled.button<{ color: string }>`
+const ConfirmButton = styled.button`
   margin-top: 1rem;
-  background-color: ${({ color }) => color};
+  background-color: ${client.theme.backgroundColor};
   color: white;
   padding: 0.8rem 1.8rem;
   font-size: 1rem;
@@ -237,17 +233,17 @@ const ConfirmButton = styled.button<{ color: string }>`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${({ color }) => color};
+    background-color: ${client.theme.backgroundColor};
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(71, 38, 163, 0.3);
   }
 `;
 
-const EditButton = styled.button<{ color: string }>`
+const EditButton = styled.button`
   margin-top: 1rem;
   background-color: white;
-  color:${({ color }) => color};
-  border: 1px solid ${({ color }) => color};
+  color: ${client.theme.primaryColor};
+  border: 1px solid ${client.theme.primaryColor};
   padding: 0.8rem 1.8rem;
   font-size: 1rem;
   font-weight: 600;
@@ -304,10 +300,10 @@ const ModalContainer = styled.div`
 `;
 
 // Success icon
-const SuccessIcon = styled.div<{color : string}>`
+const SuccessIcon = styled.div`
   width: 80px;
   height: 80px;
-  background: ${({ color }) => color};
+  background: ${client.theme.backgroundColor};
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -315,16 +311,16 @@ const SuccessIcon = styled.div<{color : string}>`
   margin: 0 auto 1.5rem;
   color: white;
   font-size: 2.5rem;
-  
+
   svg {
     animation: ${checkmarkAnimation} 0.6s ease-out;
   }
 `;
 
-const ConfirmationIcon = styled.div<{color : string}>`
+const ConfirmationIcon = styled.div`
   width: 50px;
   height: 50px;
-  background: ${({ color }) => color};
+  background: ${client.theme.backgroundColor};
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -332,16 +328,16 @@ const ConfirmationIcon = styled.div<{color : string}>`
   margin: 0 auto 1.5rem;
   color: white;
   font-size: 2.5rem;
-  
+
   svg {
     animation: ${checkmarkAnimation} 0.6s ease-out;
   }
 `;
 
 // Modal title
-const ModalTitle = styled.h2<{color : string}>`
+const ModalTitle = styled.h2`
   font-size: 2rem;
-  color:${({ color }) => color};
+  color: ${({ color }) => color};
   margin-bottom: 1rem;
   font-weight: 600;
 `;
@@ -355,22 +351,22 @@ const ModalText = styled.p`
 `;
 
 // Appointment summary
-const SummaryItem = styled.div<{color : string}>`
+const SummaryItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
-  
+
   svg {
     color: ${({ color }) => color};
   }
 `;
 
 // Home button
-const HomeButton = styled.button<{color : string}>`
-  background:${({ color }) => color};
+const HomeButton = styled.button`
+  background: ${({ color }) => color};
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -383,7 +379,7 @@ const HomeButton = styled.button<{color : string}>`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  
+
   &:hover {
     background: ${({ color }) => color};
     transform: translateY(-2px);

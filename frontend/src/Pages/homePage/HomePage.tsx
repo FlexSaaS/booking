@@ -1,20 +1,17 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { getClientConfig } from "../lib/getClientConfig";
+import { getClientConfig } from "../../configs/getClientConfig";
+import ForwardButton from "../../ReusableComponents/ForwardButton";
 
+const client = getClientConfig();
 
-interface HomeViewProps {
-    client: ReturnType<typeof getClientConfig>;
-    }
-
-const HomeView: React.FC<HomeViewProps> = ({ client }) => {
+function HomePage() {
   const navigate = useNavigate();
 
-  function handleBook() {
-    navigate("/service");
+  function handleBook(): void {
+    navigate("/services");
   }
 
   return (
@@ -22,12 +19,10 @@ const HomeView: React.FC<HomeViewProps> = ({ client }) => {
       <ProfileCard>
         <ProfileImageContainer>
           <Decoration />
-          <ProfileImage primaryColor={client.primaryColor} src={client.logo} alt={client.logoAltText} />
+          <ProfileImage src={client.profileImage} alt={`${client.name}'s profile`} $animate={client.animateProfile} />
         </ProfileImageContainer>
 
-        <BookButton primaryColor={client.primaryColor} onClick={handleBook}>
-          Book an Appointment
-        </BookButton>
+        <ForwardButton onClick={handleBook}>Book an Appointment</ForwardButton>
 
         <Description>{client.tagline}</Description>
         <ContactInfo>
@@ -44,19 +39,19 @@ const HomeView: React.FC<HomeViewProps> = ({ client }) => {
         </ContactInfo>
 
         <SocialLinks>
-          <SocialLink primaryColor={client.primaryColor} href="#" aria-label="Instagram">
+          <SocialLink href="#" aria-label="Instagram">
             <FontAwesomeIcon icon={faInstagram} />
           </SocialLink>
-          <SocialLink primaryColor={client.primaryColor} href="#" aria-label="Facebook">
+          <SocialLink href="#" aria-label="Facebook">
             <FontAwesomeIcon icon={faFacebook} />
           </SocialLink>
         </SocialLinks>
       </ProfileCard>
     </Container>
   );
-};
+}
 
-export default HomeView;
+export default HomePage;
 
 // Animations
 const fadeIn = keyframes`
@@ -81,10 +76,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(135deg, #fff8f0, #fae0ff, #e0f4ff, #f0fff8);
+  background: ${client.animateProfile
+    ? `linear-gradient(
+    135deg,
+    ${client.theme.backgroundColor},
+    ${client.theme.primaryColor},
+    ${client.theme.secondaryColor},
+    ${client.theme.backgroundColor}
+  )`
+    : client.theme.backgroundColor};
   background-size: 400% 400%;
   animation: ${gradientShift} 15s ease infinite;
 `;
@@ -101,10 +103,12 @@ const ProfileCard = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.3);
   animation: ${fadeIn} 0.8s ease-out forwards;
   transition: all 0.3s ease;
+
   &:hover {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     transform: translateY(-5px);
   }
+
   @media (max-width: 768px) {
     width: 90%;
     padding: 2rem;
@@ -123,23 +127,29 @@ const ProfileImageContainer = styled.div`
   height: 180px;
 `;
 
-const ProfileImage = styled.img<{ primaryColor: string }>`
+interface ProfileImageProps {
+  $animate: boolean;
+}
+
+const ProfileImage = styled.img<ProfileImageProps>`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid ${({ primaryColor }) => primaryColor};
-  box-shadow: 0 10px 30px rgba(122, 89, 221, 0.3);
-  animation: ${float} 4s ease-in-out infinite;
+  border: 4px solid ${client.theme.primaryColor};
+  box-shadow: 0 10px 30px ${client.theme.primaryColor}33;
+  animation: ${fadeIn} 0.8s ease-out forwards;
   transition: all 0.3s ease;
+
+  ${(props) =>
+    props.$animate &&
+    css`
+      animation: ${float} 4s ease-in-out infinite;
+    `}
+
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(122, 89, 221, 0.4);
-  }
-
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
+    box-shadow: 0 15px 40px ${client.theme.primaryColor}55;
   }
 `;
 
@@ -148,7 +158,7 @@ const Decoration = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 2px dashed rgba(122, 89, 221, 0.3);
+  border: ${client.animateProfile ? ` 2px dashed ${client.theme.primaryColor}33` : "none"};
   top: -10px;
   left: -10px;
   animation: spin 20s linear infinite;
@@ -188,30 +198,13 @@ const SocialLinks = styled.div`
   margin-top: 1.5rem;
 `;
 
-const SocialLink = styled.a<{ primaryColor: string }>`
-  color: ${({ primaryColor }) => primaryColor};
+const SocialLink = styled.a`
+  color: ${client.theme.primaryColor};
   font-size: 1.5rem;
   transition: all 0.3s ease;
   &:hover {
-    color: #4a2db5;
+    color: ${client.theme.secondaryColor};
+    transform: scale(1.2);
     transform: translateY(-3px);
-  }
-`;
-
-const BookButton = styled.button<{ primaryColor: string }>`
-  margin-top: 2rem;
-  background-color: ${({ primaryColor }) => primaryColor};
-  color: white;
-  padding: 0.8rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: #4726a3;
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(71, 38, 163, 0.3);
   }
 `;
