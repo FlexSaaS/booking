@@ -162,7 +162,6 @@ const CalendarWrapper = styled.div`
   max-width: 400px;
   border-radius: 12px;
   padding: 1rem;
-  /* background:; */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   margin: 0 auto;
 `;
@@ -174,7 +173,6 @@ const SectionTitle = styled.h3`
   gap: 0.5rem;
   font-size: 1.2rem;
   font-weight: 600;
-  /* color:; */
   margin: 1.5rem 0 1rem;
 `;
 
@@ -195,7 +193,8 @@ const TimeButton = styled.button<{ selected: boolean }>`
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: ${({ selected }) => (selected ? `0 2px 6px ${client.theme.primaryColor}33` : "none")};
+  box-shadow: ${({ selected }) =>
+    selected ? `0 2px 6px ${client.theme.primaryColor}33` : "none"};
 
   &:hover {
     background: ${({ selected }) =>

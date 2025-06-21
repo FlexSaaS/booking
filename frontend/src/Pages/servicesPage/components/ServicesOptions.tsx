@@ -43,23 +43,37 @@ export default function ServiceOptions({
 }
 
 const OptionsContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: stretch;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const ServiceCard = styled.div<{ isSelected: boolean }>`
-  padding: 1.5rem;
+  transition: all 0.3s ease;
+  padding: 1rem;
   border-radius: 16px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    padding: 0.7rem;
+  }
+
+  border: 2px solid
+    ${({ isSelected }) =>
+      isSelected ? client.theme.primaryColor : "transparent"};
   background-color: ${({ isSelected }) =>
-    isSelected ? client.theme.primaryColor : "#fff"};
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    isSelected ? client.theme.primaryColor + "20" : "#fff"};
 
   &:hover {
-    background-color: ${client.theme.secondaryColor};
+    border-color: ${client.theme.secondaryColor};
+    background-color: ${({ isSelected }) =>
+      isSelected ? client.theme.primaryColor + "30" : "#f5f5f5"};
   }
 `;
 

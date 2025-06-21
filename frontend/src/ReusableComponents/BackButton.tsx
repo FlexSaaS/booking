@@ -35,14 +35,17 @@ const StyledButton = styled.button`
   padding: 0.5rem 1.5rem;
   background: ${client.theme.primaryColor};
   border: none;
-  border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 50px;
   color: #fff;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    padding: 0rem 1.5rem;
+  }
 
   svg {
     font-size: 1.2rem;

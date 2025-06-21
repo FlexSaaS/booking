@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import type { Appointment } from "../../types/Types";
-import BackButton from "../../ReusableComponents/BackButton";
-import Title from "../../ReusableComponents/Title";
 import Container from "../../ReusableComponents/Container";
 import type { ClientFormData } from "./components/ClientForm";
 import ClientForm from "./components/ClientForm";
 import AppointmentSummary from "./components/AppointmentSummary";
+import SubHeader from "../../ReusableComponents/SubHeader";
 
 interface Props {
   appointment: Partial<Appointment>;
@@ -29,8 +28,7 @@ function DetailsPage({ appointment, updateAppointment }: Props) {
 
   return (
     <Container>
-      <BackButton to="/calendar">Go Back</BackButton>
-      <Title>Your Information</Title>
+      <SubHeader to={"/calendar"} title={"Your Information"} />
 
       <AppointmentSummary
         service={appointment.service}

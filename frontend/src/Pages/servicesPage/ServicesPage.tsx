@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import BackButton from "../../ReusableComponents/BackButton";
 import ForwardButton from "../../ReusableComponents/ForwardButton";
-import Title from "../../ReusableComponents/Title";
 import type { Appointment } from "../../types/Types";
 import ServiceOptions from "./components/ServicesOptions";
 import Container from "../../ReusableComponents/Container";
+import SubHeader from "../../ReusableComponents/SubHeader";
 
 interface ServicesPageProps {
   appointment: Partial<Appointment>;
@@ -28,9 +26,7 @@ export default function ServicesPage({
 
   return (
     <Container>
-      <BackButton to="/">Go Back</BackButton>
-
-      <Title>Select a Service</Title>
+      <SubHeader to="/" title="Select a Service" />
 
       <ServiceOptions
         appointment={appointment}

@@ -5,11 +5,14 @@ const client = getClientConfig();
 
 const Title = styled.h2`
   text-align: center;
-  font-size: "2.25rem";
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: "2rem";
   color: ${client.theme.primaryColor};
   letter-spacing: 0.03em;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
 
 export default Title;

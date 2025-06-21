@@ -25,7 +25,7 @@ export default function AppointmentSummary({ service, date, time }: Props) {
 
 const Summary = styled.p`
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   color: #666;
   font-size: 1.1rem;
   font-weight: 500;

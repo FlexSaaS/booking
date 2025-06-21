@@ -119,19 +119,29 @@ function ClientForm({ appointment, onSubmit }: Props) {
         />
       </FormGroup>
 
-      <ForwardButton disabled={!isValid} type="submit">
-        Confirm Appointment
-      </ForwardButton>
+      <Center>
+        <ForwardButton disabled={!isValid} type="submit">
+          Confirm Appointment
+        </ForwardButton>
+      </Center>
     </Form>
   );
 }
 
 export default ClientForm;
 
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Form = styled.form`
   width: 100%;
   display: grid;
   gap: 1.75rem;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -147,6 +157,9 @@ const Label = styled.label`
   align-items: center;
   gap: 0.6rem;
   font-size: 1.05rem;
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Input = styled.input`
@@ -159,6 +172,9 @@ const Input = styled.input`
     border-color: ${client.theme.secondaryColor};
     box-shadow: 0 0 6px ${client.theme.secondaryColor}55;
     outline: none;
+  }
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
   }
 `;
 

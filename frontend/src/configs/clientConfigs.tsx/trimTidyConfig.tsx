@@ -7,19 +7,20 @@ import {
 
 export const trimTidyConfig: ClientConfig = {
   name: "Trim & Tidy",
-  tagline: "Quick. Clean. Affordable.",
+  description: "Quick. Clean. Affordable.",
   logo: "/logos/trimtidy.png",
   phone: "0161 555 9988",
   email: "bookings@trimtidy.com",
   address: "55 Oxford Road, Manchester",
   animateProfile: false,
-  profileImage: "/trim-tidy-profile.png",
 
   theme: {
     primaryColor: "#2196F3", // blue
     secondaryColor: "rgb(33, 150, 243, 0.3)", // semi-transparent blue
     backgroundColor: "#FFFFFF",
     fontFamily: "'Roboto', sans-serif",
+    thirdColor: "",
+    fourthColor: "",
   },
 
   services: [
@@ -45,4 +46,5 @@ export const trimTidyConfig: ClientConfig = {
       price: "£22",
     },
   ],
+  location: "",
 };
