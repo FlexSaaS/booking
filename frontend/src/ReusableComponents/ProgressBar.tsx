@@ -1,6 +1,12 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faCircleCheck, faHandHoldingHeart, faHome, faScissors, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarAlt,
+  faCircleCheck,
+  faHandHoldingHeart,
+  faHome,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import styled, { css } from "styled-components";
 import { getClientConfig } from "../configs/getClientConfig";
 
@@ -28,104 +34,157 @@ function ProgressBar() {
 
   return (
     <ProgressBarWrapper>
-      <ProgressStep status={getStatus("/")}>
-        <FontAwesomeIcon icon={faHome} />
-        <span>Home</span>
-      </ProgressStep>
-      <ProgressStep status={getStatus("/services")}>
-        <FontAwesomeIcon icon={faHandHoldingHeart} />
-        <span>Service</span>
-      </ProgressStep>
+      <StyledLink to="/">
+        <ProgressStep status={getStatus("/")}>
+          <IconWrapper>
+            <FontAwesomeIcon icon={faHome} />
+          </IconWrapper>
+          <span>Home</span>
+        </ProgressStep>
+      </StyledLink>
 
-      <ProgressStep status={getStatus("/calendar")}>
-        <FontAwesomeIcon icon={faCalendarAlt} />
-        <span>Date</span>
-      </ProgressStep>
+      <ProgressConnector status={getStatus("/")} />
 
-      <ProgressStep status={getStatus("/details")}>
-        <FontAwesomeIcon icon={faUser} />
-        <span>Details</span>
-      </ProgressStep>
+      <StyledLink to="/services">
+        <ProgressStep status={getStatus("/services")}>
+          <IconWrapper>
+            <FontAwesomeIcon icon={faHandHoldingHeart} />
+          </IconWrapper>
+          <span>Services</span>
+        </ProgressStep>
+      </StyledLink>
 
-      <ProgressStep status={getStatus("/confirmation")}>
-        <FontAwesomeIcon icon={faCircleCheck} />
-        <span>Confirm</span>
-      </ProgressStep>
+      <ProgressConnector status={getStatus("/services")} />
+
+      <StyledLink to="/calendar">
+        <ProgressStep status={getStatus("/calendar")}>
+          <IconWrapper>
+            <FontAwesomeIcon icon={faCalendarAlt} />
+          </IconWrapper>
+          <span>Date</span>
+        </ProgressStep>
+      </StyledLink>
+
+      <ProgressConnector status={getStatus("/calendar")} />
+
+      <StyledLink to="/details">
+        <ProgressStep status={getStatus("/details")}>
+          <IconWrapper>
+            <FontAwesomeIcon icon={faUser} />
+          </IconWrapper>
+          <span>Details</span>
+        </ProgressStep>
+      </StyledLink>
+
+      <ProgressConnector status={getStatus("/details")} />
+
+      <StyledLink to="/confirmation">
+        <ProgressStep status={getStatus("/confirmation")}>
+          <IconWrapper>
+            <FontAwesomeIcon icon={faCircleCheck} />
+          </IconWrapper>
+          <span>Confirm</span>
+        </ProgressStep>
+      </StyledLink>
     </ProgressBarWrapper>
   );
 }
 
 export default ProgressBar;
 
-const ProgressBarWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  position: relative;
-  padding: 0 1rem;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+`;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: 50px;
-    right: 50px;
-    height: 3px;
-    background-color: ${client.theme.backgroundColor};
-    z-index: 1;
+const ProgressConnector = styled.div<ProgressBarSteps>`
+  flex: 0.7;
+  height: 2px;
+  background-color: ${({ status }) =>
+    status === "completed"
+      ? client.theme.secondaryColor
+      : client.theme.fourthColor};
+
+  transition: background-color 0.3s ease;
+  transform: translateY(-8px);
+`;
+
+const ProgressBarWrapper = styled.nav`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  padding: 1rem 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
   }
 `;
 
-export const ProgressStep = styled.div<ProgressBarSteps>`
+const ProgressStep = styled.div<ProgressBarSteps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 2;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  flex: 1;
+  min-width: 60px;
+  text-align: center;
+
+  ${({ status }) => {
+    switch (status) {
+      case "completed":
+        return css`
+          color: ${client.theme.secondaryColor};
+
+          ${IconWrapper} {
+            background-color: ${client.theme.secondaryColor};
+          }
+
+          svg {
+            color: white;
+          }
+        `;
+      case "active":
+        return css`
+          color: ${client.theme.primaryColor};
+          font-weight: 600;
+
+          ${IconWrapper} {
+            background-color: ${client.theme.primaryColor};
+          }
+
+          svg {
+            color: white;
+          }
+        `;
+      default:
+        return css`
+          color: ${client.theme.fourthColor};
+
+          ${IconWrapper} {
+            background-color: ${client.theme.fourthColor};
+          }
+
+          svg {
+            color: white;
+          }
+        `;
+    }
+  }}
+`;
+
+const IconWrapper = styled.div`
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 
   svg {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${({ status }) =>
-      status === "active" || status === "completed"
-        ? client.theme.primaryColor
-        : client.theme.backgroundColor};
-    border-radius: 50%;
-    padding: 8px;
-    margin-bottom: 0.5rem;
-    color: ${({ status }) =>
-      status === "active" || status === "completed"
-        ? "#fff"
-        : client.theme.primaryColor};
-    border: 3px solid ${client.theme.primaryColor};
-    transition: all 0.3s ease;
-  }
-
-  span {
-    font-size: 0.9rem;
-    color: ${client.theme.primaryColor};
-    font-weight: 500;
-    position: absolute;
-    bottom: -25px;
-    white-space: nowrap;
-  }
-
-  &:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    width: 900%;
-    height: 3px;
-    background-color: ${({ status }) =>
-      status === "completed"
-        ? client.theme.primaryColor
-        : client.theme.backgroundColor};
-    z-index: -1;
+    font-size: 1.2rem;
   }
 `;

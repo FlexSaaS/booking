@@ -4,7 +4,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const defaultClientConfig: ClientConfig = {
   name: "Default Client (Not Configured)",
-  tagline: "Please set VITE_CLIENT in your env",
+  description: "Please set VITE_CLIENT in your env",
   logo: "/logos/default.png",
   phone: "000‑000‑0000",
   email: "no-reply@example.com",
@@ -14,6 +14,8 @@ export const defaultClientConfig: ClientConfig = {
     secondaryColor: "blue",
     backgroundColor: "#ffd6ab",
     fontFamily: "sans-serif",
+    thirdColor: "",
+    fourthColor: "",
   },
   services: [
     {
@@ -25,5 +27,5 @@ export const defaultClientConfig: ClientConfig = {
     },
   ],
   animateProfile: false,
-  profileImage: undefined,
+  location: "",
 };

@@ -10,7 +10,7 @@ function ProfilePicture() {
       <ProfileImageContainer>
         <Decoration />
         <ProfileImage
-          src={client.profileImage}
+          src={client.logo}
           alt={`${client.name}'s profile`}
           $animate={client.animateProfile}
         />
@@ -53,17 +53,6 @@ const ProfileImage = styled.img<ProfileImageProps>`
   box-shadow: 0 10px 30px ${client.theme.primaryColor}33;
   animation: ${fadeIn} 0.8s ease-out forwards;
   transition: all 0.3s ease;
-
-  ${(props) =>
-    props.$animate &&
-    css`
-      animation: ${float} 4s ease-in-out infinite;
-    `}
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px ${client.theme.primaryColor}55;
-  }
 `;
 
 const Decoration = styled.div`

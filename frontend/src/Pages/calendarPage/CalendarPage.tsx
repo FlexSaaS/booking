@@ -2,10 +2,9 @@ import { useNavigate } from "react-router-dom";
 import "react-day-picker/dist/style.css";
 import type { Appointment } from "../../types/Types";
 import Calendar from "./components/Calendar";
-import BackButton from "../../ReusableComponents/BackButton";
 import ForwardButton from "../../ReusableComponents/ForwardButton";
-import Title from "../../ReusableComponents/Title";
 import Container from "../../ReusableComponents/Container";
+import SubHeader from "../../ReusableComponents/SubHeader";
 
 interface Props {
   appointment: Partial<Appointment>;
@@ -29,9 +28,7 @@ function CalendarPage({ appointment, updateAppointment }: Props) {
 
   return (
     <Container>
-      <BackButton to="/services">Go Back</BackButton>
-
-      <Title>Book Your Appointment</Title>
+      <SubHeader to={"/services"} title={"Select a date"} />
 
       <Calendar
         appointment={appointment}

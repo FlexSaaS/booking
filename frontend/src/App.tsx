@@ -5,7 +5,6 @@ import styled, { createGlobalStyle } from "styled-components";
 import Header from "./ReusableComponents/Header";
 import ServiceSelection from "./Pages/servicesPage/ServicesPage";
 import HomePage from "./Pages/homePage/HomePage";
-import ProgressBar from "./ReusableComponents/ProgressBar";
 import ClientInfo from "./Pages/detailsPage/DetailsPage";
 import Confirmation from "./Pages/confirmationPage/ConfirmationPage";
 import CalendarView from "./Pages/calendarPage/CalendarPage";
@@ -24,7 +23,6 @@ function App() {
       <AppContainer>
         <GlobalStyle />
         <Header />
-        <ProgressBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -81,8 +79,10 @@ const GlobalStyle = createGlobalStyle`
 
 const AppContainer = styled.div`
   font-family: ${client.theme.fontFamily};
-  min-height: 100vh;
-  flex-direction: column;
   width: 100%;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: ${client.theme.backgroundColor};
 `;
