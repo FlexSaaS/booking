@@ -143,7 +143,7 @@ const ProgressStep = styled.div<ProgressBarSteps>`
           }
 
           svg {
-            color: white;
+            color: ${client.theme.primaryColor};
           }
         `;
       case "active":
@@ -156,7 +156,7 @@ const ProgressStep = styled.div<ProgressBarSteps>`
           }
 
           svg {
-            color: white;
+            color: ${client.theme.secondaryColor};
           }
         `;
       default:
@@ -168,7 +168,7 @@ const ProgressStep = styled.div<ProgressBarSteps>`
           }
 
           svg {
-            color: white;
+            color: ${client.theme.primaryColor};
           }
         `;
     }

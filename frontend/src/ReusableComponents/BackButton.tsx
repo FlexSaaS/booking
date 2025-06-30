@@ -36,7 +36,7 @@ const StyledButton = styled.button`
   background: ${client.theme.primaryColor};
   border: none;
   border-radius: 50px;
-  color: #fff;
+  color: ${client.theme.secondaryColor};
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;

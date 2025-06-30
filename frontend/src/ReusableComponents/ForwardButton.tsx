@@ -62,7 +62,7 @@ const StyledButton = styled.button<{ disabled?: boolean; $pulse: boolean }>`
     disabled
       ? "#ccc"
       : `linear-gradient(135deg, ${client.theme.primaryColor} 50%, ${client.theme.thirdColor} 100%)`};
-  color: white;
+  color: ${client.theme.secondaryColor};
   padding: 0.75rem 2.5rem 0.75rem 2rem;
   border: none;
   border-radius: 50px;

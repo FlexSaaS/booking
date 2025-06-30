@@ -57,7 +57,7 @@ const Name = styled.h1`
 const Description = styled.p`
   width: 600px;
   font-size: 1.2rem;
-  color: ${client.theme.fourthColor};
+  color: ${client.theme.primaryColor};
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {

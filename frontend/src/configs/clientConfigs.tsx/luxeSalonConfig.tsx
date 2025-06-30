@@ -49,4 +49,5 @@ export const luxeSalonConfig: ClientConfig = {
       price: "£40",
     },
   ],
+  backgroundImage: undefined,
 };

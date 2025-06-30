@@ -28,4 +28,5 @@ export const defaultClientConfig: ClientConfig = {
   ],
   animateProfile: false,
   location: "",
+  backgroundImage: undefined,
 };

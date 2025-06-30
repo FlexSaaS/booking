@@ -84,5 +84,13 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+
   background-color: ${client.theme.backgroundColor};
+  ${client.backgroundImage &&
+  `
+    background-image: url(${client.backgroundImage});
+    // background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain; /* Change this to 'cover', 'contain', or specific size like '800px' */
+  `}
 `;

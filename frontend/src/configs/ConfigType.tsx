@@ -11,6 +11,8 @@ export interface ClientConfig {
   theme: Theme;
   location: string;
 
+  backgroundImage: string | undefined;
+
   services: Service[];
 }
 
